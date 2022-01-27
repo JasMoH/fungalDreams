@@ -1,4 +1,4 @@
-# Documentation matters
+# Documentation Matters
 Communication is an important part of making anything. I generally find that documents that
 aren't attached to the codebase are easily lost. I also generally dislike some of the
 format restrictions that are imposed by common tools used in corporate environments such as
@@ -6,17 +6,19 @@ the microsoft office suite. Basic digital features such as hypertext, hiararchic
 and integration with version control systems are important features for communicating effectivly about
 a rapidly changing and complicated subject such as an ongoing software project.
 
-
 # mdbook
-mdbook is a tool for turning markdown files in to webpages, PDFs, and other finished products.
+This page was created with [mdbook][], which is a tool for turning markdown files into webpages, 
+PDFs, and other finished products. This is well suited to co-existing with code or other version controlled
+artifacts, and can be readily integrated with [continuous integration] systems and deployed to hosting
+services like github/gitlab pages.
 
+[mdbook]: https://github.com/rust-lang/mdBook
+[continuous integration]: https://rust-lang.github.io/mdBook/continuous-integration.html
+
+Install with: 
 ```shell script
 cargo install mdbook
 ```
-
-## mdbook hints
-mdbook will automatically create blank markdown files from the `SUMMARY.md`, which is an easy way to keep
-the summary in sync with your files as you grow. 
 
 # mermaid.js
 [mermaid.js](https://mermaid-js.github.io/mermaid/#/) can be [integrated with mdbook](https://github.com/badboy/mdbook-mermaid) as a preproccessor.
@@ -35,16 +37,15 @@ graph BT
     A -->|Automorphisms| A
 ```
 
-[mermaid cheatsheet](https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/) is a good
-resource for mermaid syntax
+The [mermaid cheatsheet](https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/) is a good
+resource for mermaid syntax.
 
-## setting up mermaid.js
-Install mdbook-mermaid with
+Install mdbook-mermaid with:
 ```shell script
 cargo install mdbook-mermaid
+mdbook-mermaid install path/to/your/book
 ```
-
-your book.toml needs to have the following lines to invoke the mermaid preprocessor
+your book.toml will be update to include the following lines to invoke the mermaid preprocessor.
 ```shell script
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
@@ -53,16 +54,13 @@ command = "mdbook-mermaid"
 additional-js = ["mermaid.min.js", "mermaid-init.js"]
 ``` 
 
-These config lines and associated files can be automatically added with
-```shell script
-mdbook-mermaid install path/to/your/book
-```
+# wavedrom
+[Wavedrom][] will render digital timing diagrams from JSON descriptions, and is integrated with
+ [mdbook-wavedrom][]. A [live wavedrom editor][] is available.
 
-
-# wavedrome
-
-A live wavedrome editor is provided [here](https://wavedrom.com/editor.html).
-
+[Wavedrom]: https://wavedrom.com
+[mdbook-wavedrom]: https://github.com/JasMoH/mdbook-wavedrom
+[live wavedrom editor]: https://wavedrom.com/editor.html
 ```wavedrom
 {signal: [
   {name: 'clk', wave: 'p.....|...'},
@@ -72,5 +70,8 @@ A live wavedrome editor is provided [here](https://wavedrom.com/editor.html).
   {name: 'ack', wave: '1.....|01.'}
 ]}
 ```
-
-# instalation and setup
+wavedrom is installed the same way as mermaid
+```shell script
+cargo install mdbook-wavedrom
+mdbook-wavedrom install path/to/your/book
+```
