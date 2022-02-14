@@ -1,5 +1,6 @@
 # Summary
 
 - [Introduction](./intro.md)
-- [Docker stuff](docker/chapter_1.md)
+- [Documentation tools](./documentation_tools.md)
+- [Docker stuff](./docker/docker.md)
     - [Interactive Docker](docker/interactive.md)

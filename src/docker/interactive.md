@@ -1,4 +1,7 @@
 
 # example shell for interactive development
 
-[here's an interactive file](run_interactive_env.sh)
+
+```shell
+{{#include run_interactive_env.sh}}
+```
