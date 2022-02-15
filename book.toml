@@ -10,7 +10,10 @@ title = "Fungal Dreams"
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
 
+[preprocessor.wavedrom]
+command = "mdbook-wavedrom"
+
 [output]
 
 [output.html]
-additional-js = ["mermaid.min.js", "mermaid-init.js"]
+additional-js = ["mermaid.min.js", "mermaid-init.js", "wavedrom.min.js", "wavedrome-default.js"]
