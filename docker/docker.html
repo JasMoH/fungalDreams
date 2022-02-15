@@ -143,6 +143,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="some-notes-on-what-docker-is-for-the-uninitiated"><a class="header" href="#some-notes-on-what-docker-is-for-the-uninitiated">some notes on what docker is for the uninitiated</a></h1>
+<p>New users to docker often find it hard to know where to start. Many tutorials dive right in to deploying 
+containers without really saying what a container <em>is</em>. This attempts to collect some observations that
+I've found useful for explaining docker to newbies.</p>
 <h2 id="docker-is-confusing"><a class="header" href="#docker-is-confusing">Docker is confusing</a></h2>
 <p>The reason why docker is confusing to learn about is because it isn't really <em>one</em> thing, it's
 a collection of many tools that solve many problems. Because there's no single problem it solves, there's also
@@ -154,14 +157,14 @@ kuberenetes.</p>
 <li>coordinating server side services such as load balances and databases</li>
 </ul>
 <p>These problems have very different needs, and use very different sets of features in different ways.</p>
-<h2 id="docker-as-chroot"><a class="header" href="#docker-as-chroot">Docker as chroot</a></h2>
+<h2 id="docker-is-chroot--sorta"><a class="header" href="#docker-is-chroot--sorta">Docker is chroot ... sorta</a></h2>
 <p>I find it easiest to start to think through what docker is by building up from something simpler.
 The simplest thing that you could call &quot;a container&quot; is <a href="https://en.wikipedia.org/wiki/Chroot">chroot</a> with 
 a bunch of extra convenience tools. chroot allows you to have a separate file system in a box.
 Notably, anything that runs in the chroot container still runs natively, and has access to anyting that isn't
 hidden by the file system, such as network, physical hardware, kernel modules, etc. You can look at something like <a href="https://github.com/RPi-Distro/pi-gen">pi-gen</a> as an example of something
 that uses chroot to build up an entire operating system. </p>
-<p>The scripting in pigen is rather single purpose, so docker provides a bunch of convinienc features
+<p>The scripting in pigen is rather single purpose, so docker provides a bunch of convenience features
 to manage building and running containers. this <a href="https://devops.stackexchange.com/questions/2826/difference-between-chroot-and-docker">stack exchange</a>
 article lists the nice bits:</p>
 <ul>
@@ -174,7 +177,7 @@ article lists the nice bits:</p>
 <li>docker-compose or swarm as low-profile upgrades to much more.</li>
 <li>The large zoo of other solutions based on dockerized containers (OpenShift etc.).</li>
 </ul>
-<h2 id="docker-as-more-than-chroot"><a class="header" href="#docker-as-more-than-chroot">Docker as more than chroot</a></h2>
+<h2 id="docker-is-more-than-chroot"><a class="header" href="#docker-is-more-than-chroot">Docker is more than chroot</a></h2>
 <p>chroot only provides isolation on the file system, docker also provides isolation on:</p>
 <ul>
 <li>mnt namespace provides a root filesystem</li>
@@ -184,6 +187,23 @@ article lists the nice bits:</p>
 <li>uts provides dedicated hostname</li>
 <li>ipc provides dedicated shared memory</li>
 </ul>
+<h2 id="there-are-many-ways-to-use-containers"><a class="header" href="#there-are-many-ways-to-use-containers">There are many ways to use containers</a></h2>
+<p>There are a ton of tools for configuring and running containers: <code>docker run</code>, <code>docker-compose</code>, k8s, and others.
+They all provide different ways to select your containers, and configure them to run in a bunch of different ways.
+You can run containers interactively for debugging or developing other software, or cluster them together and spool them up based
+on dynamic loading in a larger system </p>
+<p>These different user interfaces to the same underlying container system evolved somewhat independently, and feel
+like they are almost unrelated tools. As best as I can tell, that's because they are. </p>
+<h2 id="most-of-these-differences-are-related-to-side-effects"><a class="header" href="#most-of-these-differences-are-related-to-side-effects">Most of these differences are related to side-effects</a></h2>
+<p>If the containers perfectly isolated their contents from the outside world these programs would run
+on the exact same files and environmental variables as inputs, isolated from the outside network every time.
+Any changes they made to those files or variables are discarded, and nothing they try to send gets to the network.
+This is useless! The whole point of computing is to do something with the real world other than burn CPU.
+When you run a container you usually expose network ports, mount files, set environmental variables, and harvest the output.
+In other words, controlling the side effects available for your container to change. These different tools have 
+wildly different styles for specifying and managing all these options.</p>
+<p>This also means a single container can have different uses and different behavior depending on how it is invoked.
+This isn't any different from any other program that has run-time decision making based on reading some environmental input.</p>
 
                     </main>
 

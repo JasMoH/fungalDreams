@@ -142,7 +142,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="documentation-matters"><a class="header" href="#documentation-matters">Documentation matters</a></h1>
+                        <h1 id="documentation-matters"><a class="header" href="#documentation-matters">Documentation Matters</a></h1>
 <p>Communication is an important part of making anything. I generally find that documents that
 aren't attached to the codebase are easily lost. I also generally dislike some of the
 format restrictions that are imposed by common tools used in corporate environments such as
@@ -150,12 +150,13 @@ the microsoft office suite. Basic digital features such as hypertext, hiararchic
 and integration with version control systems are important features for communicating effectivly about
 a rapidly changing and complicated subject such as an ongoing software project.</p>
 <h1 id="mdbook"><a class="header" href="#mdbook">mdbook</a></h1>
-<p>mdbook is a tool for turning markdown files in to webpages, PDFs, and other finished products.</p>
+<p>This page was created with <a href="https://github.com/rust-lang/mdBook">mdbook</a>, which is a tool for turning markdown files into webpages, 
+PDFs, and other finished products. This is well suited to co-existing with code or other version controlled
+artifacts, and can be readily integrated with <a href="https://rust-lang.github.io/mdBook/continuous-integration.html">continuous integration</a> systems and deployed to hosting
+services like github/gitlab pages.</p>
+<p>Install with: </p>
 <pre><code class="language-shell script">cargo install mdbook
 </code></pre>
-<h2 id="mdbook-hints"><a class="header" href="#mdbook-hints">mdbook hints</a></h2>
-<p>mdbook will automatically create blank markdown files from the <code>SUMMARY.md</code>, which is an easy way to keep
-the summary in sync with your files as you grow. </p>
 <h1 id="mermaidjs"><a class="header" href="#mermaidjs">mermaid.js</a></h1>
 <p><a href="https://mermaid-js.github.io/mermaid/#/">mermaid.js</a> can be <a href="https://github.com/badboy/mdbook-mermaid">integrated with mdbook</a> as a preproccessor.
 It produces a variety of useful diagrams such as these:</p>
@@ -169,24 +170,22 @@ It produces a variety of useful diagrams such as these:</p>
     A[You can Even make monoidal objects!] --&gt;|With multiple| A
     A --&gt;|Automorphisms| A
 </pre>
-<p><a href="https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/">mermaid cheatsheet</a> is a good
-resource for mermaid syntax</p>
-<h2 id="setting-up-mermaidjs"><a class="header" href="#setting-up-mermaidjs">setting up mermaid.js</a></h2>
-<p>Install mdbook-mermaid with</p>
+<p>The <a href="https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/">mermaid cheatsheet</a> is a good
+resource for mermaid syntax.</p>
+<p>Install mdbook-mermaid with:</p>
 <pre><code class="language-shell script">cargo install mdbook-mermaid
+mdbook-mermaid install path/to/your/book
 </code></pre>
-<p>your book.toml needs to have the following lines to invoke the mermaid preprocessor</p>
+<p>your book.toml will be update to include the following lines to invoke the mermaid preprocessor.</p>
 <pre><code class="language-shell script">[preprocessor.mermaid]
 command = &quot;mdbook-mermaid&quot;
 
 [output.html]
 additional-js = [&quot;mermaid.min.js&quot;, &quot;mermaid-init.js&quot;]
 </code></pre>
-<p>These config lines and associated files can be automatically added with</p>
-<pre><code class="language-shell script">mdbook-mermaid install path/to/your/book
-</code></pre>
-<h1 id="wavedrome"><a class="header" href="#wavedrome">wavedrome</a></h1>
-<p>A live wavedrome editor is provided <a href="https://wavedrom.com/editor.html">here</a>.</p>
+<h1 id="wavedrom"><a class="header" href="#wavedrom">wavedrom</a></h1>
+<p><a href="https://wavedrom.com">Wavedrom</a> will render digital timing diagrams from JSON descriptions, and is integrated with
+<a href="https://github.com/JasMoH/mdbook-wavedrom">mdbook-wavedrom</a>. A <a href="https://wavedrom.com/editor.html">live wavedrom editor</a> is available.</p>
 <body onload="WaveDrom.ProcessAll()">
 <script type="WaveDrom">{signal: [
   {name: 'clk', wave: 'p.....|...'},
@@ -196,7 +195,10 @@ additional-js = [&quot;mermaid.min.js&quot;, &quot;mermaid-init.js&quot;]
   {name: 'ack', wave: '1.....|01.'}
 ]}
 </script>
-<h1 id="instalation-and-setup"><a class="header" href="#instalation-and-setup">instalation and setup</a></h1>
+<p>wavedrom is installed the same way as mermaid</p>
+<pre><code class="language-shell script">cargo install mdbook-wavedrom
+mdbook-wavedrom install path/to/your/book
+</code></pre>
 
                     </main>
 
